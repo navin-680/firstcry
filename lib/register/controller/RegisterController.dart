@@ -1,3 +1,4 @@
+import 'package:first_cry_demo/home/views/home_page.dart';
 import 'package:first_cry_demo/register/model/RegisterModel.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,16 +9,33 @@ class RegisterController extends GetxController{
   RegisterModel data =RegisterModel();
   RxBool showPassword=false.obs;
 
-  Future<void> addUser() {
-    return users
-        .add({
-      'full_name': data.fullName, // John Doe
-      'mobile_number': data.mobileNo, // Stokes and Sons
-      'email_id': data.email,
-      'password':data.password// 42
-    })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+  Future<void> addUser() async {
+    users.where("email_id", isEqualTo: "navar680@gmail.com2").where("password",isEqualTo: "NaRak007").get().then(
+          (querySnapshot) {
+        if(querySnapshot.docs.isNotEmpty){
+          Get.snackbar("User Already Exits", "Please use different email id");
+
+        }else{
+           users
+              .add({
+            'full_name': data.fullName, // John Doe
+            'mobile_number': data.mobileNo, // Stokes and Sons
+            'email_id': data.email,
+            'password':data.password// 42
+          })
+              .then((value) =>{
+                Get.snackbar("User Created Successfully ", ""),
+                Get.to(HomePage())
+           })
+              .catchError((error) => print("Failed to add user: $error"));
+        }
+
+      },
+      onError: (e) => print("Error completing: $e"),
+    );
+
+
+
   }
 
 
