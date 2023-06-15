@@ -69,8 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Container(
               color: Colors.grey[200],
-              padding: EdgeInsets.all(8),
-              child: Row(
+              padding: const EdgeInsets.all(8),
+              child: const Row(
                 children: [
                   Icon(
                     Icons.location_on_outlined,
