@@ -10,14 +10,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<String> images = [
-    "assets/icons/banner.png",
-    "assets/icons/banner.png",
-    "assets/icons/banner.png",
-    "assets/icons/banner.png",
-    "assets/icons/banner.png",
-    "assets/icons/banner.png",
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +81,55 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Image.asset("assets/icons/offer.jpg"),
+            Image.asset("assets/icons/banner.png"),
+            SizedBox(
+              height: 8,
+            ),
+            SizedBox(
+              height: 56,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      child: Image.asset(
+                        "assets/icons/bus.gif",
+                      )),
+                  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      child: Image.asset(
+                        "assets/icons/def_toys.jpg",
+                      )),
+                  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      child: Image.asset(
+                        "assets/icons/appstrip.jpg",
+                      )),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 8),
+              child: Center(
+                child: Text(
+                  "Shop By Category",
+                  style: TextStyle(color: Colors.grey, fontSize: 18),
+                ),
+              ),
+            ),
+            GridView.builder(
+              padding: EdgeInsets.only(left: 5,right: 2),
+              itemCount: 100,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) => Container(
+                padding: EdgeInsets.only(right: 3),
+                child: Image.asset("assets/icons/gf06.png",),
+              ),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+            )
           ],
         ));
   }
