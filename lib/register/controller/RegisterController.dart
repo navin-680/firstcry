@@ -2,6 +2,8 @@ import 'package:first_cry_demo/home/views/home_screen.dart';
 import 'package:first_cry_demo/register/model/RegisterModel.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class RegisterController extends GetxController{
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -9,7 +11,10 @@ class RegisterController extends GetxController{
   RegisterModel data =RegisterModel();
   RxBool showPassword=false.obs;
 
+
   Future<void> addUser() async {
+    SharedPreferences pref =await SharedPreferences.getInstance();
+
     users.where("email_id", isEqualTo: "navar680@gmail.com2").where("password",isEqualTo: "NaRak007").get().then(
           (querySnapshot) {
         if(querySnapshot.docs.isNotEmpty){
@@ -24,8 +29,9 @@ class RegisterController extends GetxController{
             'password':data.password// 42
           })
               .then((value) =>{
+                pref.setBool("is_login", true),
                 Get.snackbar("User Created Successfully ", ""),
-                Get.to(MyHomePage(title: "title"))
+                Get.offAll(MyHomePage(title: "title"))
            })
               .catchError((error) => print("Failed to add user: $error"));
         }

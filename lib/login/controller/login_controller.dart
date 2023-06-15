@@ -1,7 +1,10 @@
 import 'package:first_cry_demo/home/views/home_screen.dart';
 import 'package:first_cry_demo/register/view/register_page.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class LoginController extends GetxController{
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -38,12 +41,14 @@ class LoginController extends GetxController{
     }
   }
 
-  void checkLogin(){
+  void checkLogin() async{
+    SharedPreferences pref =await SharedPreferences.getInstance();
+
    users.where("email_id", isEqualTo: email).where("password",isEqualTo: password).get().then(
           (querySnapshot) {
-        print("Successfully completed");
+        pref.setBool("is_login", true);
         if(querySnapshot.docs.isNotEmpty){
-          Get.to(MyHomePage(title: 'Home',));
+          Get.offAll(MyHomePage(title: 'Home',));
         }else{
           Get.snackbar(
             "Invalid Credentials",
