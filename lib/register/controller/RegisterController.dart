@@ -1,4 +1,4 @@
-import 'package:first_cry_demo/home/views/home_page.dart';
+import 'package:first_cry_demo/home/views/home_screen.dart';
 import 'package:first_cry_demo/register/model/RegisterModel.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -25,7 +25,7 @@ class RegisterController extends GetxController{
           })
               .then((value) =>{
                 Get.snackbar("User Created Successfully ", ""),
-                Get.to(HomePage())
+                Get.to(MyHomePage(title: "title"))
            })
               .catchError((error) => print("Failed to add user: $error"));
         }

@@ -1,4 +1,4 @@
-import 'package:first_cry_demo/home/views/home_page.dart';
+import 'package:first_cry_demo/home/views/home_screen.dart';
 import 'package:first_cry_demo/register/view/register_page.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,11 +39,11 @@ class LoginController extends GetxController{
   }
 
   void checkLogin(){
-   users.where("email_id", isEqualTo: "navar680@gmail.com2").where("password",isEqualTo: "NaRak007").get().then(
+   users.where("email_id", isEqualTo: email).where("password",isEqualTo: password).get().then(
           (querySnapshot) {
         print("Successfully completed");
         if(querySnapshot.docs.isNotEmpty){
-          Get.to(HomePage());
+          Get.to(MyHomePage(title: 'Home',));
         }else{
           Get.snackbar(
             "Invalid Credentials",
