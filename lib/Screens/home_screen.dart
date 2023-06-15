@@ -57,11 +57,11 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-          actions: _icons
+          actions: icons
               .asMap()
               .entries
               .map(
-                (MapEntry map) => _buildIcon(map.key),
+                (MapEntry map) => buildIcon(map.key),
               )
               .toList(),
         ),
@@ -69,8 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Container(
               color: Colors.grey[200],
-              padding: EdgeInsets.all(8),
-              child: Row(
+              padding: const EdgeInsets.all(8),
+              child: const Row(
                 children: [
                   Icon(
                     Icons.location_on_outlined,
@@ -94,16 +94,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-List<IconData> _icons = [
+List<IconData> icons = [
   Icons.search,
   Icons.notifications_none,
   Icons.favorite_border_outlined,
   Icons.add_shopping_cart_outlined
 ];
-
-Widget _buildIcon(int index) {
+Widget buildIcon(int index) {
   return Padding(
     padding: const EdgeInsets.all(5.0),
-    child: Icon(_icons[index], color: Colors.grey, size: 25),
+    child: Icon(icons[index], color: Colors.grey, size: 25),
   );
 }
