@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override
@@ -9,6 +10,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<String> images = [
+    "assets/icons/banner.png",
+    "assets/icons/banner.png",
+    "assets/icons/banner.png",
+    "assets/icons/banner.png",
+    "assets/icons/banner.png",
+    "assets/icons/banner.png",
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     Icons.location_on_outlined,
                     color: Colors.grey,
                   ),
-                  SizedBox(width: 5,),
+                  SizedBox(
+                    width: 5,
+                  ),
                   Text("Select a location to see product availability"),
                   Spacer(),
                   Icon(
@@ -77,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
+            Image.asset("assets/icons/offer.jpg"),
           ],
         ));
   }
@@ -88,6 +100,7 @@ List<IconData> _icons = [
   Icons.favorite_border_outlined,
   Icons.add_shopping_cart_outlined
 ];
+
 Widget _buildIcon(int index) {
   return Padding(
     padding: const EdgeInsets.all(5.0),
