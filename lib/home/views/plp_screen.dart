@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'home_screen.dart';
 
 class ProductListingScreen extends StatelessWidget {
@@ -14,11 +15,11 @@ class ProductListingScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.arrow_back,
                     color: Colors.grey,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Image.asset(
@@ -42,7 +43,7 @@ class ProductListingScreen extends StatelessWidget {
             Container(
               height: 30.0,
               color: Colors.white,
-              child: Text(
+              child: const Text(
                 "Dresses & Skirts",
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
@@ -50,8 +51,8 @@ class ProductListingScreen extends StatelessWidget {
             Container(
               color: Colors.grey[300],
               height: 40,
-              padding: EdgeInsets.only(left: 16),
-              child: Row(
+              padding: const EdgeInsets.only(left: 16),
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
@@ -107,9 +108,9 @@ class GridCard extends StatelessWidget {
       child: Column(
         children: [
           Image.network(imageURL, height: 130,),
-          SizedBox(height: 8.0),
+          const SizedBox(height: 8.0),
           Container(
-            padding: EdgeInsets.only(left: 8),
+            padding: const EdgeInsets.only(left: 8),
             width: double.infinity,
             color: Colors.white70,
             child: Column(
@@ -117,16 +118,16 @@ class GridCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontWeight: FontWeight.w400, color: Colors.grey, fontSize: 12),
+                  style: const TextStyle(fontWeight: FontWeight.w400, color: Colors.grey, fontSize: 12),
                 ),
-                SizedBox(height: 4.0),
+                const SizedBox(height: 4.0),
                 Text(
                   'Price: \u{20B9} ${price.toStringAsFixed(2)}',
-                  style: TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey),
                 ),
                 Text(
                   'Discounted Price: \$${discountedPrice.toStringAsFixed(2)}',
-                  style: TextStyle(color: Colors.green),
+                  style: const TextStyle(color: Colors.green),
                 ),
               ],
             ),
