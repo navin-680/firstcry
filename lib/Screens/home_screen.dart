@@ -56,16 +56,24 @@ class _MyHomePageState extends State<MyHomePage> {
               )
               .toList(),
         ),
-        body: Column(
+        body: ListView(
           children: [
             Container(
+              color: Colors.grey[200],
+              padding: EdgeInsets.all(8),
               child: Row(
                 children: [
                   Icon(
                     Icons.location_on_outlined,
                     color: Colors.grey,
                   ),
-                  Text("Select a location to see product availability")
+                  SizedBox(width: 5,),
+                  Text("Select a location to see product availability"),
+                  Spacer(),
+                  Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.grey,
+                  ),
                 ],
               ),
             ),
