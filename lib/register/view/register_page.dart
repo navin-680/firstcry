@@ -2,13 +2,16 @@ import 'package:first_cry_demo/register/controller/RegisterController.dart';
 import 'package:first_cry_demo/register/model/RegisterModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 class RegisterPage extends StatelessWidget {
-   RegisterPage({super.key});
+  RegisterPage({super.key});
+
   final RegisterController controller = Get.put(RegisterController());
+  var _formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
-    var passwordVisible = false;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -30,6 +33,8 @@ class RegisterPage extends StatelessWidget {
               height: 12,
             ),
             Form(
+                key: _formKey,
+
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -42,12 +47,11 @@ class RegisterPage extends StatelessWidget {
                     hintText: 'Enter Your Full Name',
                   ),
                   onSaved: (String? value) {
-                    // This optional block of code can be used to run
-                    // code when the user saves the form.
+                    controller.data.fullName = value;
                   },
                   validator: (String? value) {
-                    return (value != null && value.contains('@'))
-                        ? 'Do not use the @ char.'
+                    return (value!.isEmpty)
+                        ? 'Please enter full name'
                         : null;
                   },
                 ),
@@ -62,14 +66,13 @@ class RegisterPage extends StatelessWidget {
                   decoration: const InputDecoration(
                     hintText: 'Enter Your Mobile Number',
                   ),
+                  keyboardType: TextInputType.number,
+                  maxLength: 10,
                   onSaved: (String? value) {
-                    // This optional block of code can be used to run
-                    // code when the user saves the form.
+                    controller.data.mobileNo = int.parse(value ?? "0");
                   },
                   validator: (String? value) {
-                    return (value != null && value.contains('@'))
-                        ? 'Do not use the @ char.'
-                        : null;
+                    return controller.validateMobile(value!);
                   },
                 ),
                 const Text(
@@ -87,14 +90,12 @@ class RegisterPage extends StatelessWidget {
                   decoration: const InputDecoration(
                     hintText: 'Enter Your Email Id',
                   ),
+                  keyboardType: TextInputType.emailAddress,
                   onSaved: (String? value) {
-                    // This optional block of code can be used to run
-                    // code when the user saves the form.
+                    controller.data.email = value;
                   },
                   validator: (String? value) {
-                    return (value != null && value.contains('@'))
-                        ? 'Do not use the @ char.'
-                        : null;
+                    return (controller.isEmail(value!));
                   },
                 ),
                 const SizedBox(
@@ -104,48 +105,41 @@ class RegisterPage extends StatelessWidget {
                   "Password",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Enter Your Password',
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          // Based on passwordVisible state choose the icon
-                          passwordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: Theme.of(context).primaryColorDark,
+                Obx(
+                  () => TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Enter Your Password',
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            controller.showPassword.value
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                          onPressed: () {
+                            controller.showPassword.value =
+                                !controller.showPassword.value;
+                          },
                         ),
-                        onPressed: () {
-                          // Update the state i.e. toogle the state of passwordVisible variable
-                          /* setState(() {
-                          passwordVisible = !passwordVisible;
-                        });*/
-                        },
                       ),
-                    ),
-                    onSaved: (String? value) {
-                      // This optional block of code can be used to run
-                      // code when the user saves the form.
-                    },
-                    validator: (String? value) {
-                      return (value != null && value.contains('@'))
-                          ? 'Do not use the @ char.'
-                          : null;
-                    },
-                    obscureText: !passwordVisible),
+                      onSaved: (String? value) {
+                        controller.data.password = value;
+                      },
+                      validator: (String? value) {
+                        return (controller.validatePassword(value!));
+                      },
+                      obscureText: controller.showPassword.value),
+                ),
                 const Text(
                   "Password must be at least 8 characters long with 1 Uppercase , 1 Lowercase & 1 Numeric Character.",
                   style: TextStyle(fontSize: 12),
                 ),
               ],
             )),
-
-            SizedBox (
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
-                onPressed: () {
-                  controller.addUser(RegisterModel(fullName: "vikas",mobileNo: 1234567890,email: "vikad",password: "1234"));
-                },
+                onPressed: submit,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepOrange,
                   shape: RoundedRectangleBorder(
@@ -163,4 +157,14 @@ class RegisterPage extends StatelessWidget {
       ),
     );
   }
+  void submit() {
+    final isValid = _formKey.currentState?.validate();
+    if (!isValid!) {
+      return;
+    }
+    _formKey.currentState?.save();
+    controller.addUser();
+
+  }
+
 }
