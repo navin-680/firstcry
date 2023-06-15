@@ -107,7 +107,7 @@ class GridCard extends StatelessWidget {
       height: 200,
       child: Column(
         children: [
-          Image.network(imageURL, height: 130,),
+          Image.network(imageURL, height: 120,),
           const SizedBox(height: 8.0),
           Container(
             padding: const EdgeInsets.only(left: 8),

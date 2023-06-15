@@ -1,4 +1,6 @@
+import 'package:first_cry_demo/home/views/plp_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -82,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Image.asset("assets/icons/offer.jpg"),
             Image.asset("assets/icons/banner.png"),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             SizedBox(
@@ -91,17 +93,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 scrollDirection: Axis.horizontal,
                 children: [
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Image.asset(
                         "assets/icons/bus.gif",
                       )),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Image.asset(
                         "assets/icons/def_toys.jpg",
                       )),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Image.asset(
                         "assets/icons/appstrip.jpg",
                       )),
@@ -109,8 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              child: Center(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: const Center(
                 child: Text(
                   "Shop By Category",
                   style: TextStyle(color: Colors.grey, fontSize: 18),
@@ -118,15 +120,20 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             GridView.builder(
-              padding: EdgeInsets.only(left: 5,right: 2),
-              itemCount: 100,
-              physics: NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.only(left: 5,right: 2),
+              itemCount: 10,
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemBuilder: (context, index) => Container(
-                padding: EdgeInsets.only(right: 3),
-                child: Image.asset("assets/icons/gf06.png",),
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: (){
+                  Get.to(ProductListingScreen());
+                },
+                child: Container(
+                  padding: const EdgeInsets.only(right: 3),
+                  child: Image.asset("assets/icons/gf06.png",),
+                ),
               ),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
               ),
             )
