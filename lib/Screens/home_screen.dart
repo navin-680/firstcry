@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override
@@ -9,6 +10,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<String> images = [
+    "assets/icons/banner.png",
+    "assets/icons/banner.png",
+    "assets/icons/banner.png",
+    "assets/icons/banner.png",
+    "assets/icons/banner.png",
+    "assets/icons/banner.png",
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,19 +65,30 @@ class _MyHomePageState extends State<MyHomePage> {
               )
               .toList(),
         ),
-        body: Column(
+        body: ListView(
           children: [
             Container(
+              color: Colors.grey[200],
+              padding: EdgeInsets.all(8),
               child: Row(
                 children: [
                   Icon(
                     Icons.location_on_outlined,
                     color: Colors.grey,
                   ),
-                  Text("Select a location to see product availability")
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text("Select a location to see product availability"),
+                  Spacer(),
+                  Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.grey,
+                  ),
                 ],
               ),
             ),
+            Image.asset("assets/icons/offer.jpg"),
           ],
         ));
   }
